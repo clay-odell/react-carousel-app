@@ -50,3 +50,30 @@ it("works when you click on the left arrow", () => {
   expect(container.querySelector('img[alt="testing image 2"]')).not.toBeInTheDocument();
 
 });
+//Tests visibilty of left arrow on first page
+it("has no left arrow when on the first photo", () => {
+  const { container } = render(
+    <Carousel
+    photos={TEST_IMAGES}
+    title="images for testing"
+    />
+   );
+   const leftArrow = container.querySelector(".bi-arrow-left-circle");
+   expect(leftArrow).toHaveStyle("visibility: hidden");
+
+});
+//Test visibility of right arrow on last photo index
+it("has no right arrow when on the last photo", () => {
+  const { container } = render(
+    <Carousel 
+      photos={TEST_IMAGES}
+      title="images for testing"
+    />
+  );
+  const rightArrow = container.querySelector(".bi-arrow-right-circle");
+  for (let i = 0; i < TEST_IMAGES.length -1; i++) {
+    fireEvent.click(rightArrow);
+  }
+  expect(rightArrow).toHaveStyle("visibility: hidden");
+
+});
